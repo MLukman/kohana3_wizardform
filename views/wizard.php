@@ -7,22 +7,24 @@
 <?php endif; ?>
 
 <?php if (!empty($wizard['errormsg'])): ?>
-<div style="border:1px solid #000; background: red; color: yellow; padding: 2px 5px; margin: 10px 0;">
+<div class="error">
 <?php echo $wizard['errormsg']; ?>
 </div>
 <?php endif; ?>
 
-<form action="<?php echo htmlentities(Arr::get($wizard, 'formaction', '')); ?>" method="post">
+<form action="<?php echo htmlentities($wizard['formaction']); ?>" method="post">
 
 <?php echo $wizard['content']; ?>
 
 <div class="buttons">
-	<input type="submit" style="float:right;" name="wizard:save" value="<?php echo htmlentities(Arr::get($wizard, 'savelabel', 'Save')); ?>" />
-<?php if ($wizard['step'] > 0): ?>
-	<input type="submit" name="wizard:prev" value="<?php echo htmlentities(Arr::get($wizard, 'prevlabel', '< Previous')); ?>" />
+<?php if ($wizard['save_enabled']): ?>
+	<input type="submit" class="button button_save" style="float:right;" name="wizard:save" value="<?php echo htmlentities(Arr::get($wizard, 'savelabel', 'Save')); ?>" />
 <?php endif; ?>
 <?php if ($wizard['step'] < $wizard['steps'] - 1): ?>
-	<input type="submit" name="wizard:next" value="<?php echo htmlentities(Arr::get($wizard, 'nextlabel', 'Next >')); ?>" />
+	<input type="submit" class="button button_next" style="float:right;" name="wizard:next" value="<?php echo htmlentities(Arr::get($wizard, 'nextlabel', 'Next >')); ?>" />
+<?php endif; ?>
+<?php if ($wizard['step'] > 0): ?>
+	<input type="submit" class="button button_prev" name="wizard:prev" value="<?php echo htmlentities(Arr::get($wizard, 'prevlabel', '< Previous')); ?>" />
 <?php endif; ?>
 </div>
 										  
